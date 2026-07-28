@@ -1,0 +1,80 @@
+exports.handler = async (event) => {
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, body: 'Method Not Allowed' };
+  }
+
+  try {
+    const { token, form } = JSON.parse(event.body);
+    const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY;
+    const web3formsKey = process.env.WEB3FORMS_KEY;
+
+    if (!recaptchaSecret) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'No reCAPTCHA secret configured' }),
+      };
+    }
+
+    if (!web3formsKey) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'No Web3Forms key configured' }),
+      };
+    }
+
+    const verifyParams = new URLSearchParams();
+    verifyParams.append('secret', recaptchaSecret);
+    verifyParams.append('response', token);
+
+    const verifyResp = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: verifyParams,
+    });
+
+    const verifyData = await verifyResp.json();
+
+    if (!verifyData.success) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: 'reCAPTCHA verification failed', details: verifyData }),
+      };
+    }
+
+    const payload = {
+      access_key: web3formsKey,
+      subject: form.subject || `Nouvelle demande - ${form.name}`,
+      name: form.name,
+      phone: form.phone,
+      email: form.email,
+      building: form.building || '-',
+      city: form.city,
+      reference: form.reference || '-',
+      latitude: form.latitude || '',
+      longitude: form.longitude || '',
+      google_maps_url: form.google_maps_url || '',
+      'g-recaptcha-response': token,
+      service: form.service,
+      message: form.message,
+    };
+
+    const resp = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await resp.json();
+
+    return {
+      statusCode: resp.status,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    };
+  } catch (err) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: err.message }),
+    };
+  }
+};
