@@ -7,4 +7,5 @@ React app scaffolded with Vite.
 ```bash
 npm install
 npm run dev
+Deploy trigger
 ```
