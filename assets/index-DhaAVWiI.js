@@ -28,16 +28,19 @@ ${_.message}`);return`https://wa.me/${_f}?text=${dt}`},[T,_,I,F]),ut=async _t=>{
 ${I.address}
 ${F}`)}`:`https://wa.me/${_f}`,target:"_blank",rel:"noopener noreferrer",className:"btn btn--whatsapp contact-sidebar__cta",children:[f.jsx("svg",{viewBox:"0 0 24 24",width:"20",height:"20",fill:"currentColor",children:f.jsx("path",{d:"M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"})}),r("contact_call_btn")]}),f.jsxs(Ft,{to:"/services",className:"btn btn--ghost contact-sidebar__link",children:[r("contact_services_link"),f.jsx("span",{className:"material-symbols-outlined",children:"arrow_forward"})]})]})]})})}),Z&&f.jsx("div",{className:"map-modal",onClick:()=>W(!1),children:f.jsxs("div",{className:"map-modal__content",onClick:_t=>_t.stopPropagation(),children:[f.jsxs("div",{className:"map-modal__header",children:[f.jsxs("h3",{children:[f.jsx("span",{className:"material-symbols-outlined",children:"map"}),"Choisir l'adresse"]}),f.jsx("button",{className:"map-modal__close",onClick:()=>W(!1),children:f.jsx("span",{className:"material-symbols-outlined",children:"close"})})]}),f.jsx(my,{initial:I,onSelect:_t=>{h(pt=>({...pt,city:_t.address})),K(_t),W(!1)}})]})})]})}const By="/api/chatbot",qy=`Tu es Chamouss, l'assistant virtuel de SupraMax Energy, une entreprise tunisienne spécialisée en ingénierie photovoltaïque premium.
 
+## Mission
+Tu es là pour répondre uniquement aux questions liées à SupraMax Energy, à l'énergie solaire photovoltaïque, aux installations solaires, au stockage, au monitoring, aux services proposés sur le site et au contact commercial.
+
 ## À propos de SupraMax Energy
 - Basée en Tunisie
-- Spécialiste en installations solaires photovoltaïques
+- Spécialiste en installations solaires photovoltaïques premium
 - S'adresse au résidentiel, commercial et industriel
 - Contact : +216 50 910 808 (WhatsApp) | contact@supramax.energy
 - Site : supramax.energy
 
 ## Services proposés
 1. **Étude & Conception** — Audit initial, étude de faisabilité, dimensionnement optimal
-2. **Installation photovoltaïque** — Pose de panneaux sur toitures, ombrières et sol, clé en main
+2. **Installation photovoltaïque** — Pose de panneaux sur toitures, ombrières, façades et au sol, clé en main
 3. **Stockage & Continuité** — Batteries lithium, systèmes autonomes, backup intelligent
 4. **Monitoring & Maintenance** — Supervision 24/7, alertes prédictives, maintenance préventive
 
@@ -46,36 +49,32 @@ ${F}`)}`:`https://wa.me/${_f}`,target:"_blank",rel:"noopener noreferrer",classNa
 - Commercial & entreprises (bureaux, commerces)
 - Sites industriels (grande échelle, logistique)
 
-## Compétences
-- 150+ projets réalisés
-- 100% disponibilité garantie
-- 1000 KWC installés
-- Garantie 25 ans
-- Équipe technique qualifiée
-
-## Panneaux solaires photovoltaïques — Informations
+## Contenu important à rappeler
 - Les panneaux photovoltaïques convertissent la lumière du soleil en électricité
-- Durée de vie moyenne : 25-30 ans
-- Économie possible : jusqu'à 90% sur la facture d'électricité
+- Durée de vie moyenne : 25 à 30 ans
+- Économie possible : jusqu'à 90 % sur la facture d'électricité
 - Installation possible sur toiture, façade, ombrière ou au sol
 - Autonomie énergétique et réduction de l'empreinte carbone
-- Le solaire fonctionne même les jours nuageux (production réduite)
+- Le solaire fonctionne même par temps nuageux, avec une production réduite
 - Retour sur investissement généralement entre 5 et 8 ans en Tunisie
+- Ne donne jamais de prix précis sans devis personnalisé
 
 ## Ton et style
 - Sois chaleureux, professionnel et accessible
-- Utilise un langage simple et clair
-- Réponds en français par défaut, mais adapte-toi à la langue de l'utilisateur
+- Utilise un langage simple, clair et naturel
+- Réponds en français par défaut, mais adapte-toi à la langue de l'utilisateur si nécessaire
 - Sois concis mais complet
-- Guide l'utilisateur vers les services ou le contact si nécessaire
-- N'invente jamais de prix — redirige vers le formulaire de contact pour un devis personnalisé
+- Aide l'utilisateur à trouver la bonne information ou à contacter SupraMax Energy
+- Si une question dépasse le domaine solaire / photovoltaïque / SupraMax, réponds poliment en redirigeant vers les services ou le contact
 
-## Règles
+## Règles strictes
+- Réponds uniquement sur SupraMax Energy, le solaire photovoltaïque, les services, le contact et les devis
+- Si la question n'est pas liée au domaine, ne réponds pas de manière générale ; redirige vers les services ou le formulaire de contact
 - Ne partage jamais de fausses informations
 - Si tu ne sais pas, dis-le honnêtement
-- Toujours orienter vers SupraMax Energy pour les besoins concrets
+- N'invente jamais de prix — redirige vers le formulaire de contact pour un devis personnalisé
 - Le numéro WhatsApp pour contact direct est : +216 50 910 808`,Uy=[{label:"Vos services",text:"Quels sont vos services ?"},{label:"Devis",text:"Je voudrais un devis pour une installation solaire"},{label:"Panneaux",text:"Comment fonctionnent les panneaux solaires ?"},{label:"Contact",text:"Comment vous contacter ?"}];function Zy(){const[r,p]=j.useState(!1),[_,h]=j.useState(!1),[v,b]=j.useState([{role:"assistant",content:`Bonjour ! Je suis **Chamouss**, votre assistant SupraMax Energy. ☀️
 
-Comment puis-je vous aider aujourd'hui ?`}]),[T,M]=j.useState(""),[S,E]=j.useState(!1),B=j.useRef(null),z=j.useRef(null),Z=j.useCallback(()=>{B.current?.scrollIntoView({behavior:"smooth"})},[]);j.useEffect(()=>{Z()},[v,S,Z]),j.useEffect(()=>{r&&z.current?.focus()},[r]),j.useEffect(()=>{const k=setTimeout(()=>h(!0),2e3);return()=>clearTimeout(k)},[]),j.useEffect(()=>{if(_){const k=setTimeout(()=>h(!1),6e3);return()=>clearTimeout(k)}},[_]);const W=async k=>{const nt=(k||T).trim();if(!nt||S)return;const rt={role:"user",content:nt};b(F=>[...F,rt]),M(""),E(!0),h(!1);try{const J=(await(await fetch(By,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"google/gemma-4-26b-a4b-it:free",messages:[{role:"system",content:qy},...v.slice(-10),rt],temperature:.7,max_tokens:800})})).json()).choices?.[0]?.message?.content||"Désolé, je n'ai pas pu traiter votre demande. Réessayez plus tard.";b(St=>[...St,{role:"assistant",content:J}])}catch{b(F=>[...F,{role:"assistant",content:"Erreur de connexion. Vérifiez votre connexion internet et réessayez."}])}finally{E(!1)}},I=k=>{k.key==="Enter"&&!k.shiftKey&&(k.preventDefault(),W())},K=k=>k.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/\*(.*?)\*/g,"<em>$1</em>").split(`
+Comment puis-je vous aider aujourd'hui ?`}]),[T,M]=j.useState(""),[S,E]=j.useState(!1),B=j.useRef(null),z=j.useRef(null),Z=j.useCallback(()=>{B.current?.scrollIntoView({behavior:"smooth"})},[]);j.useEffect(()=>{Z()},[v,S,Z]),j.useEffect(()=>{r&&z.current?.focus()},[r]),j.useEffect(()=>{const k=setTimeout(()=>h(!0),2e3);return()=>clearTimeout(k)},[]),j.useEffect(()=>{if(_){const k=setTimeout(()=>h(!1),6e3);return()=>clearTimeout(k)}},[_]);const W=async k=>{const nt=(k||T).trim();if(!nt||S)return;const rt={role:"user",content:nt};b(F=>[...F,rt]),M(""),E(!0),h(!1);try{const J=(await(await fetch(By,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:[{role:"system",content:qy},...v.slice(-10),rt],temperature:.7,max_tokens:800})})).json()).choices?.[0]?.message?.content||"Désolé, je n'ai pas pu traiter votre demande. Réessayez plus tard.";b(St=>[...St,{role:"assistant",content:J}])}catch{b(F=>[...F,{role:"assistant",content:"Erreur de connexion. Vérifiez votre connexion internet et réessayez."}])}finally{E(!1)}},I=k=>{k.key==="Enter"&&!k.shiftKey&&(k.preventDefault(),W())},K=k=>k.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/\*(.*?)\*/g,"<em>$1</em>").split(`
 `).map((nt,rt)=>nt.startsWith("- ")?`<li>${nt.slice(2)}</li>`:nt.match(/^\d+\.\s/)?`<li>${nt.replace(/^\d+\.\s/,"")}</li>`:nt).join(`
 `);return f.jsxs(f.Fragment,{children:[_&&!r&&f.jsxs("div",{className:"chatbot-announce",onClick:()=>{p(!0),h(!1)},children:[f.jsx("div",{className:"chatbot-announce__avatar",children:f.jsx("span",{className:"material-symbols-outlined",children:"solar_power"})}),f.jsxs("div",{className:"chatbot-announce__content",children:[f.jsx("strong",{children:"Chamouss"}),f.jsx("span",{children:"Besoin d'aide ? Je suis là pour vous guider ! ☀️"})]}),f.jsx("button",{className:"chatbot-announce__close",onClick:k=>{k.stopPropagation(),h(!1)},children:f.jsx("span",{className:"material-symbols-outlined",children:"close"})})]}),f.jsx("button",{className:`chatbot-fab ${r?"chatbot-fab--open":""} ${_?"chatbot-fab--pulse":""}`,onClick:()=>{p(!r),h(!1)},"aria-label":"Chat avec Chamouss",children:f.jsx("div",{className:"chatbot-fab__inner",children:r?f.jsx("span",{className:"material-symbols-outlined",children:"close"}):f.jsx("span",{className:"material-symbols-outlined",children:"chat"})})}),r&&f.jsxs("div",{className:"chatbot",children:[f.jsxs("div",{className:"chatbot__header",children:[f.jsx("div",{className:"chatbot__header-bg"}),f.jsxs("div",{className:"chatbot__avatar",children:[f.jsx("span",{className:"material-symbols-outlined",children:"solar_power"}),f.jsx("span",{className:"chatbot__avatar-ring"})]}),f.jsxs("div",{className:"chatbot__header-info",children:[f.jsx("h4",{children:"Chamouss"}),f.jsxs("span",{className:"chatbot__status",children:[f.jsx("span",{className:"chatbot__status-dot"}),"Assistant IA — SupraMax Energy"]})]}),f.jsx("button",{className:"chatbot__close",onClick:()=>p(!1),children:f.jsx("span",{className:"material-symbols-outlined",children:"close"})})]}),f.jsxs("div",{className:"chatbot__messages",children:[v.map((k,nt)=>f.jsxs("div",{className:`chatbot__msg chatbot__msg--${k.role}`,children:[k.role==="assistant"&&f.jsx("div",{className:"chatbot__msg-avatar",children:f.jsx("span",{className:"material-symbols-outlined",children:"solar_power"})}),f.jsx("div",{className:"chatbot__bubble",children:f.jsx("div",{dangerouslySetInnerHTML:{__html:K(k.content)}})})]},nt)),S&&f.jsxs("div",{className:"chatbot__msg chatbot__msg--assistant",children:[f.jsx("div",{className:"chatbot__msg-avatar",children:f.jsx("span",{className:"material-symbols-outlined",children:"solar_power"})}),f.jsxs("div",{className:"chatbot__bubble chatbot__bubble--typing",children:[f.jsx("span",{className:"chatbot__dot"}),f.jsx("span",{className:"chatbot__dot"}),f.jsx("span",{className:"chatbot__dot"})]})]}),f.jsx("div",{ref:B})]}),v.length<=1&&f.jsx("div",{className:"chatbot__quick",children:Uy.map((k,nt)=>f.jsx("button",{className:"chatbot__quick-btn",onClick:()=>W(k.text),children:k.label},nt))}),f.jsxs("div",{className:"chatbot__input-wrap",children:[f.jsx("input",{ref:z,type:"text",className:"chatbot__input",placeholder:"Posez votre question...",value:T,onChange:k=>M(k.target.value),onKeyDown:I,disabled:S}),f.jsx("button",{className:"chatbot__send",onClick:()=>W(),disabled:!T.trim()||S,"aria-label":"Envoyer",children:f.jsx("span",{className:"material-symbols-outlined",children:"send"})})]})]})]})}function Hy(){const{pathname:r}=En();return j.useEffect(()=>{window.scrollTo(0,0)},[r]),null}function Py(){return f.jsx(Eg,{children:f.jsxs(Rg,{children:[f.jsx(Hy,{}),f.jsx(Ug,{}),f.jsx(Bg,{}),f.jsx("main",{children:f.jsxs(tg,{children:[f.jsx(Ws,{path:"/",element:f.jsx(Zg,{})}),f.jsx(Ws,{path:"/services",element:f.jsx(Hg,{})}),f.jsx(Ws,{path:"/a-propos",element:f.jsx(Pg,{})}),f.jsx(Ws,{path:"/realisations",element:f.jsx(Yg,{})}),f.jsx(Ws,{path:"/contact",element:f.jsx(Dy,{})})]})}),f.jsx(qg,{}),f.jsx(Zy,{})]})})}tv.createRoot(document.getElementById("root")).render(f.jsx(co.StrictMode,{children:f.jsx(Py,{})}));
