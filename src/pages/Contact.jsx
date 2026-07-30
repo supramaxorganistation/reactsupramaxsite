@@ -7,6 +7,7 @@ import './Contact.css'
 
 const WHATSAPP_NUMBER = '21692660716'
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+const SUBMIT_FORM_URL = '/.netlify/functions/submit-form'
 
 export default function Contact() {
   const { t } = useLanguage()
@@ -103,15 +104,23 @@ export default function Contact() {
         },
       }
 
-      const resp = await fetch('/api/submit-form', {
+      const resp = await fetch(SUBMIT_FORM_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       })
 
+      const responseText = await resp.text()
+      let data = {}
+
+      try {
+        data = responseText ? JSON.parse(responseText) : {}
+      } catch {
+        data = { error: 'Réponse inattendue du serveur.' }
+      }
+
       if (!resp.ok) {
-        const err = await resp.json().catch(() => ({}))
-        setSendError(err.error || 'Erreur lors de l\'envoi. Réessayez plus tard.')
+        setSendError(data.error || 'Erreur lors de l\'envoi. Réessayez plus tard.')
         setSending(false)
         return
       }
