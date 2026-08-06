@@ -4,26 +4,13 @@ export const handler = async (event) => {
   }
 
   try {
-    let requestBody = {}
-
-    try {
-      requestBody = typeof event.body === 'string' ? JSON.parse(event.body) : event.body || {}
-    } catch {
-      return {
-        statusCode: 400,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ error: 'Invalid JSON payload' }),
-      }
-    }
-
-    const { token, form } = requestBody;
+    const { token, form } = JSON.parse(event.body);
     const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY;
     const web3formsKey = process.env.WEB3FORMS_KEY;
 
     if (!recaptchaSecret) {
       return {
         statusCode: 500,
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ error: 'No reCAPTCHA secret configured' }),
       };
     }
@@ -31,7 +18,6 @@ export const handler = async (event) => {
     if (!web3formsKey) {
       return {
         statusCode: 500,
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ error: 'No Web3Forms key configured' }),
       };
     }
@@ -46,17 +32,11 @@ export const handler = async (event) => {
       body: verifyParams,
     });
 
-    let verifyData = {}
-    try {
-      verifyData = await verifyResp.json()
-    } catch {
-      verifyData = {}
-    }
+    const verifyData = await verifyResp.json();
 
     if (!verifyData.success) {
       return {
         statusCode: 400,
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ error: 'reCAPTCHA verification failed', details: verifyData }),
       };
     }
@@ -84,12 +64,7 @@ export const handler = async (event) => {
       body: JSON.stringify(payload),
     });
 
-    let data = {}
-    try {
-      data = await resp.json()
-    } catch {
-      data = {}
-    }
+    const data = await resp.json();
 
     return {
       statusCode: resp.status,
@@ -99,7 +74,6 @@ export const handler = async (event) => {
   } catch (err) {
     return {
       statusCode: 500,
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ error: err.message }),
     };
   }

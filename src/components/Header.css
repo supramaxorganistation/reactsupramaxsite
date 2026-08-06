@@ -133,6 +133,45 @@
   gap: var(--space-xs);
 }
 
+.mobile-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-1);
+}
+
+.mobile-nav__logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.mobile-nav__brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-nav__company-name {
+  font-family: var(--font-heading);
+  font-size: var(--text-body);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.mobile-nav__tagline {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
 .mobile-nav__link {
   display: flex;
   align-items: center;

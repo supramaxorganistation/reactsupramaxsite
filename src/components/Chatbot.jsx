@@ -112,6 +112,7 @@ export default function Chatbot() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          systemInstruction: SYSTEM_PROMPT,
           messages: [
             { role: 'system', content: SYSTEM_PROMPT },
             ...messages.slice(-10),

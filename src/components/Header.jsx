@@ -76,6 +76,14 @@ export default function Header() {
 
       <div className={`mobile-nav ${open ? 'mobile-nav--open' : ''}`} aria-hidden={!open}>
         <nav className="mobile-nav__inner" aria-label="Navigation mobile">
+          <Link to="/" className="mobile-nav__brand" aria-label="SupraMax Energy — Accueil">
+            <img src="/logo.png" alt="SupraMax Energy" className="mobile-nav__logo-img" />
+            <span className="mobile-nav__brand-text">
+              <span className="mobile-nav__company-name">SupraMax Energy</span>
+              <span className="mobile-nav__tagline">{t('tagline')}</span>
+            </span>
+          </Link>
+
           {NAV_LINKS.map((link) => (
             <Link
               key={link.to}

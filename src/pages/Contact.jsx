@@ -6,8 +6,10 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import './Contact.css'
 
 const WHATSAPP_NUMBER = '21692660716'
-const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
-const SUBMIT_FORM_URL = '/.netlify/functions/submit-form'
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || ''
+const WEB3FORMS_SUBMIT_URL = 'https://api.web3forms.com/submit'
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY
+const VERIFY_RECAPTCHA_URL = '/api/verify-recaptcha'
 
 export default function Contact() {
   const { t } = useLanguage()
@@ -86,25 +88,44 @@ export default function Contact() {
 
     try {
       setSending(true)
-      const payload = {
-        token: captchaToken,
-        form: {
-          subject: `Nouvelle demande - ${form.name}`,
-          name: form.name,
-          phone: form.phone,
-          email: form.email,
-          building: form.building || '-',
-          city: form.city,
-          reference: form.reference || '-',
-          latitude: location?.latitude || '',
-          longitude: location?.longitude || '',
-          google_maps_url: googleMapsUrl,
-          service: SERVICE_OPTIONS.find(s => s.value === form.service)?.label || form.service,
-          message: form.message,
-        },
+
+      const verifyResp = await fetch(VERIFY_RECAPTCHA_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: captchaToken }),
+      })
+
+      const verifyText = await verifyResp.text()
+      let verifyData = {}
+
+      try {
+        verifyData = verifyText ? JSON.parse(verifyText) : {}
+      } catch {
+        verifyData = { error: 'Réponse inattendue du serveur.' }
       }
 
-      const resp = await fetch(SUBMIT_FORM_URL, {
+      if (!verifyResp.ok || verifyData.success === false) {
+        setSendError(verifyData.error || verifyData.message || 'reCAPTCHA verification failed')
+        return
+      }
+
+      const payload = {
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: `Nouvelle demande - ${form.name}`,
+        name: form.name,
+        phone: form.phone,
+        email: form.email,
+        building: form.building || '-',
+        city: form.city,
+        reference: form.reference || '-',
+        latitude: location?.latitude || '',
+        longitude: location?.longitude || '',
+        google_maps_url: googleMapsUrl,
+        service: SERVICE_OPTIONS.find(s => s.value === form.service)?.label || form.service,
+        message: form.message,
+      }
+
+      const resp = await fetch(WEB3FORMS_SUBMIT_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -120,7 +141,13 @@ export default function Contact() {
       }
 
       if (!resp.ok) {
-        setSendError(data.error || 'Erreur lors de l\'envoi. Réessayez plus tard.')
+        setSendError(data.error || data.message || 'Erreur lors de l\'envoi. Réessayez plus tard.')
+        setSending(false)
+        return
+      }
+
+      if (data.success === false) {
+        setSendError(data.error || data.message || 'Erreur lors de l\'envoi. Réessayez plus tard.')
         setSending(false)
         return
       }
