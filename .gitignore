@@ -6,3 +6,4 @@ dist
 .vite
 server/.env
 .env
+dev.log

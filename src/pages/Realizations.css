@@ -44,6 +44,22 @@
   transition: transform var(--duration-slow) var(--ease-out);
 }
 
+.project-card__img--portrait {
+  object-fit: contain;
+}
+
+.project-card__visual--portrait {
+  background-color: var(--color-surface-2);
+  height: 340px;
+}
+
+.project-card--portrait .project-card__header {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-xs);
+}
+
 .project-card:hover .project-card__img {
   transform: scale(1.04);
 }

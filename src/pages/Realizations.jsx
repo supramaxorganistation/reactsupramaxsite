@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useEffect, useState } from 'react'
 import './Realizations.css'
-import RealisationsGallery from '../components/RealisationsGallery'
 import ProjectCarousel from '../components/ProjectCarousel'
 import ErrorBoundary from '../components/ErrorBoundary'
 
@@ -11,89 +10,92 @@ export default function Realizations() {
 
   const PROJECTS = [
     {
-      title: 'Domaine des Cèdres',
-      location: 'La Marsa',
-      capacity: '25 kWp',
-      type: t('real_residential'),
-      kpi1: { label: 'Économie', value: '68%' },
-      kpi2: { label: 'Interruptions', value: '0' },
-      desc: t('real_project1_desc'),
-      img: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&q=80',
-      imgAlt: 'Panneaux solaires sur toiture de villa à La Marsa',
-    },
-    {
-      title: 'Business Hub Berges du Lac',
+      title: 'Système de Batteries — Dépannage',
       location: 'Tunis',
-      capacity: '120 kWp',
-      type: t('real_commercial'),
-      kpi1: { label: 'ROI', value: 'Court' },
-      kpi2: { label: 'Image', value: 'Renforcée' },
-      desc: t('real_project2_desc'),
-      img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
-      imgAlt: 'Bureau moderne Berges du Lac avec installation solaire',
+      capacity: '—',
+      type: 'Stockage & Dépannage',
+      kpi1: { label: 'Continuité', value: 'Assurée' },
+      kpi2: { label: 'Interruptions', value: '0' },
+      desc: 'Installation d\'un système de batteries pour l\'alimentation de secours et le dépannage énergétique. Une solution fiable qui garantit la continuité de l\'électricité en cas de coupure, avec une gestion intelligente de la charge et de la décharge.',
+      img: '/realisations/realisations-4.jpg',
+      imgAlt: 'Installation de batteries système de dépannage',
+      portrait: true,
     },
     {
-      title: 'Usine Textile Sahel',
-      location: 'Monastir',
-      capacity: '850 kWp',
-      type: t('real_industrial'),
-      kpi1: { label: 'Supervision', value: '24/7' },
-      kpi2: { label: 'Résilience', value: 'Élevée' },
-      desc: t('real_project3_desc'),
-      img: 'https://images.unsplash.com/photo-1513828583688-c52646db42da?w=800&q=80',
-      imgAlt: 'Usine textile au Sahel avec installation solaire industrielle',
+      title: 'Installation Photovoltaïque Maison',
+      location: 'Tunis',
+      capacity: '8 kWp',
+      type: t('real_residential'),
+      kpi1: { label: 'Économie', value: '70%' },
+      kpi2: { label: 'Interruptions', value: '0' },
+      desc: 'Installation photovoltaïque complète pour une maison : panneaux sur toiture, onduleur performant et câblage soigné. Une solution qui couvre les besoins quotidiens du foyer, réduit considérablement la facture d\'électricité et assure une indépendance énergétique durable.',
+      img: [
+        '/realisations/realisations-5.jpg',
+        '/realisations/realisations-6.jpg',
+        '/realisations/realisations-7.jpg',
+        '/realisations/realisations-8.jpg',
+      ],
+      imgAlt: 'Installation photovoltaïque maison',
+      portrait: true,
     },
     {
-      title: 'Campus Technologique Sfax',
-      location: 'Sfax',
-      capacity: '340 kWp',
-      type: 'Institutionnel',
-      kpi1: { label: 'Design', value: 'Intégré' },
-      kpi2: { label: 'Données', value: 'Visibles' },
-      desc: t('real_project4_desc'),
-      img: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=80',
-      imgAlt: 'Campus technologique à Sfax avec panneaux solaires',
+      title: 'Installation Photovoltaïque Résidentielle',
+      location: 'Tunis',
+      capacity: '10 kWp',
+      type: t('real_residential'),
+      kpi1: { label: 'Économie', value: '65%' },
+      kpi2: { label: 'Production', value: '15 MWh/an' },
+      desc: 'Installation photovoltaïque complète pour une résidence : panneaux haute performance sur toiture, onduleur de dernière génération et finitions soignées. Une solution conçue pour couvrir la consommation du foyer, réduire durablement la facture et valoriser le patrimoine.',
+      img: [
+        '/realisations/realisations-9.jpg',
+        '/realisations/realisations-10.jpg',
+        '/realisations/realisations-11.jpg',
+        '/realisations/realisations-12.jpg',
+      ],
+      imgAlt: 'Installation photovoltaïque résidentielle',
+      portrait: true,
+    },
+    {
+      title: 'Installation Photovoltaïque Menzah',
+      location: 'Menzah',
+      capacity: '6 kWp',
+      type: t('real_residential'),
+      kpi1: { label: 'Économie', value: '75%' },
+      kpi2: { label: 'Interruptions', value: '0' },
+      desc: 'Installation photovoltaïque pour une résidence à Menzah : panneaux solaires sur toiture, onduleur performant et raccordement soigné. Une solution qui assure l\'autonomie du foyer, réduit fortement la facture et s\'intègre élégamment à la maison.',
+      img: [
+        '/realisations/realisations-13.jpg',
+        '/realisations/realisations-14.jpg',
+        '/realisations/realisations-15.jpg',
+        '/realisations/realisations-16.jpg',
+      ],
+      imgAlt: 'Installation photovoltaïque Menzah',
+      portrait: true,
+    },
+    {
+      title: 'Nouvelle Installation Familiale',
+      location: 'Tunis',
+      capacity: '5 kWp',
+      type: t('real_residential'),
+      kpi1: { label: 'Économie', value: '70%' },
+      kpi2: { label: 'Autonomie', value: 'Optimale' },
+      desc: 'Une nouvelle installation, une nouvelle famille qui choisit l\'énergie solaire. Merci à nos clients pour leur confiance. Chez SupraMax Energy, nous transformons chaque projet en une solution durable, économique et tournée vers l\'avenir.',
+      img: [
+        '/realisations/realisations-17.jpg',
+        '/realisations/realisations-18.jpg',
+        '/realisations/realisations-19.jpg',
+        '/realisations/realisations-20.jpg',
+      ],
+      imgAlt: 'Nouvelle installation familiale photovoltaïque',
+      portrait: true,
     },
   ]
 
   const [externalProjects, setExternalProjects] = useState([])
 
   useEffect(() => {
-    fetch('/realisations/links.json')
-      .then(res => res.ok ? res.json() : [])
-      .then(urls => {
-          if (!Array.isArray(urls)) return
-          let ext = []
-          if (urls.length === 1) {
-            ext = urls.map((u, i) => ({
-              title: `Menzah 8`,
-              location: 'Menzah 8',
-              capacity: '—',
-              type: t('real_residential'),
-              kpi1: { label: 'Économie', value: '—' },
-              kpi2: { label: 'Interruptions', value: '—' },
-              desc: t('real_project1_desc'),
-              img: u,
-              imgAlt: `Réalisation ${i+1}`,
-            }))
-          } else if (urls.length > 1) {
-            // group into a single project with multiple images
-            ext = [{
-              title: `Menzah 8`,
-              location: 'Menzah 8',
-              capacity: '—',
-              type: t('real_residential'),
-              kpi1: { label: 'Économie', value: '—' },
-              kpi2: { label: 'Interruptions', value: '—' },
-              desc: t('real_project1_desc'),
-              img: urls,
-              imgAlt: `Menzah 8 gallery`,
-            }]
-          }
-          setExternalProjects(ext)
-      })
-      .catch(() => {})
-  }, [t])
+    setExternalProjects([])
+  }, [])
 
   return (
     <>
@@ -130,15 +132,15 @@ export default function Realizations() {
           <ErrorBoundary>
           <div className="portfolio-grid" data-stagger>
             {[...PROJECTS, ...externalProjects].map((project, i) => (
-              <div className="project-card" key={i}>
-                <div className="project-card__visual">
+              <div className={`project-card${project.portrait ? ' project-card--portrait' : ''}`} key={i}>
+                <div className={`project-card__visual${project.portrait ? ' project-card__visual--portrait' : ''}`}>
                   {Array.isArray(project.img) ? (
-                    <ProjectCarousel images={project.img} alt={project.imgAlt} className="project-card__img" />
+                    <ProjectCarousel images={project.img} alt={project.imgAlt} className={`project-card__img${project.portrait ? ' project-card__img--portrait' : ''}`} />
                   ) : (
                     <img
                       src={project.img}
                       alt={project.imgAlt}
-                      className="project-card__img"
+                      className={`project-card__img${project.portrait ? ' project-card__img--portrait' : ''}`}
                       loading="lazy"
                     />
                   )}

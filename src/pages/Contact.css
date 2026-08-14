@@ -201,6 +201,26 @@
   opacity: 0.8;
 }
 
+.contact-social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.contact-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-small);
+  color: var(--color-text-secondary);
+  transition: color var(--duration-fast);
+}
+
+.contact-social-link:hover {
+  color: var(--color-primary);
+}
+
 /* ── FAQ Cards ─────────────────────────────────────── */
 .faq-cards {
   display: flex;
