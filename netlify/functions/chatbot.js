@@ -6,7 +6,7 @@ export const handler = async (event) => {
   try {
     const geminiApiKey = process.env.GEMINI_API_KEY;
     const openRouterApiKey = process.env.OPENROUTER_API_KEY;
-    const geminiModel = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
+    const geminiModel = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
     const openRouterModel = process.env.OPENROUTER_MODEL || 'meta-llama/llama-3.1-8b-instruct';
 
     const body = JSON.parse(event.body || '{}');

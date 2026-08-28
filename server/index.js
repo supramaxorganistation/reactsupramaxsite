@@ -8,7 +8,7 @@ require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 
 const app = express();
 const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY || process.env.VITE_RECAPTCHA_SECRET_KEY;
-const geminiModel = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
+const geminiModel = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
 const openRouterModel = process.env.OPENROUTER_MODEL || 'meta-llama/llama-3.1-8b-instruct';
 
 const isGeminiConfigured = Boolean(process.env.GEMINI_API_KEY);
