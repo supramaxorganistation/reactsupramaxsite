@@ -150,6 +150,7 @@ app.post('/api/verify-recaptcha', async (req, res) => {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
+        timeout: 5000,
       }
     );
 
@@ -184,6 +185,7 @@ app.post('/api/submit-form', async (req, res) => {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
+        timeout: 5000,
       }
     );
 
@@ -204,6 +206,7 @@ app.post('/api/submit-form', async (req, res) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        timeout: 5000,
       }
     );
 

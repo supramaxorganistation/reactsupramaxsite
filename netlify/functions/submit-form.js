@@ -1,3 +1,22 @@
+const fetchWithTimeout = async (url, options, ms) => {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), ms);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+};
+
+const safeJson = async (resp) => {
+  const text = await resp.text();
+  try {
+    return text ? JSON.parse(text) : {};
+  } catch {
+    return { error: 'Réponse inattendue du service distant.' };
+  }
+};
+
 export const handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
@@ -26,13 +45,17 @@ export const handler = async (event) => {
     verifyParams.append('secret', recaptchaSecret);
     verifyParams.append('response', token);
 
-    const verifyResp = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: verifyParams,
-    });
+    const verifyResp = await fetchWithTimeout(
+      'https://www.google.com/recaptcha/api/siteverify',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: verifyParams,
+      },
+      5000
+    );
 
-    const verifyData = await verifyResp.json();
+    const verifyData = await safeJson(verifyResp);
 
     if (!verifyData.success) {
       return {
@@ -58,13 +81,17 @@ export const handler = async (event) => {
       message: form.message,
     };
 
-    const resp = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
+    const resp = await fetchWithTimeout(
+      'https://api.web3forms.com/submit',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      },
+      5000
+    );
 
-    const data = await resp.json();
+    const data = await safeJson(resp);
 
     return {
       statusCode: resp.status,
@@ -72,9 +99,13 @@ export const handler = async (event) => {
       body: JSON.stringify(data),
     };
   } catch (err) {
+    const message =
+      err?.name === 'AbortError'
+        ? 'Délai dépassé sur un service externe (Google ou Web3Forms).'
+        : err.message;
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: err.message }),
+      body: JSON.stringify({ error: message }),
     };
   }
 };
