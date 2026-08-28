@@ -9,7 +9,11 @@ const WHATSAPP_NUMBER = '21696453635'
 const FACEBOOK_URL = 'https://www.facebook.com/profile.php?id=100064150808045'
 const INSTAGRAM_URL = 'https://www.instagram.com/supramaxenergy'
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || ''
-const SUBMIT_FORM_URL = '/api/submit-form'
+// Le plan gratuit Web3Forms n'accepte que les envois côté client : la clé
+// d'accès est une clé publique (comme la clé site reCAPTCHA), avec repli codé.
+const WEB3FORMS_SUBMIT_URL = 'https://api.web3forms.com/submit'
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || '321d057f-b621-44f3-b76a-7cab1ed9b4bd'
+const VERIFY_RECAPTCHA_URL = '/api/verify-recaptcha'
 
 export default function Contact() {
   const { t } = useLanguage()
@@ -89,26 +93,47 @@ export default function Contact() {
     try {
       setSending(true)
 
-      const resp = await fetch(SUBMIT_FORM_URL, {
+      const verifyResp = await fetch(VERIFY_RECAPTCHA_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          token: captchaToken,
-          form: {
-            subject: `Nouvelle demande - ${form.name}`,
-            name: form.name,
-            phone: form.phone,
-            email: form.email,
-            building: form.building || '-',
-            city: form.city,
-            reference: form.reference || '-',
-            latitude: location?.latitude || '',
-            longitude: location?.longitude || '',
-            google_maps_url: googleMapsUrl,
-            service: SERVICE_OPTIONS.find(s => s.value === form.service)?.label || form.service,
-            message: form.message,
-          },
-        }),
+        body: JSON.stringify({ token: captchaToken }),
+      })
+
+      const verifyText = await verifyResp.text()
+      let verifyData = {}
+
+      try {
+        verifyData = verifyText ? JSON.parse(verifyText) : {}
+      } catch {
+        verifyData = { error: 'Réponse inattendue du serveur.' }
+      }
+
+      if (!verifyResp.ok || verifyData.success === false) {
+        setSendError(verifyData.error || verifyData.message || 'reCAPTCHA verification failed')
+        setSending(false)
+        return
+      }
+
+      const payload = {
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: `Nouvelle demande - ${form.name}`,
+        name: form.name,
+        phone: form.phone,
+        email: form.email,
+        building: form.building || '-',
+        city: form.city,
+        reference: form.reference || '-',
+        latitude: location?.latitude || '',
+        longitude: location?.longitude || '',
+        google_maps_url: googleMapsUrl,
+        service: SERVICE_OPTIONS.find(s => s.value === form.service)?.label || form.service,
+        message: form.message,
+      }
+
+      const resp = await fetch(WEB3FORMS_SUBMIT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       })
 
       const responseText = await resp.text()
