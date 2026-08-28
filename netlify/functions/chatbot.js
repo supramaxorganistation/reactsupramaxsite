@@ -32,20 +32,29 @@ export const handler = async (event) => {
         .trim();
 
     if (geminiApiKey) {
-      const geminiResponse = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${geminiApiKey}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: toGeminiContents(body.messages),
-            generationConfig: {
-              temperature: body.temperature,
-              maxOutputTokens: body.max_tokens,
-            },
-          }),
-        }
-      );
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 8000);
+
+      let geminiResponse;
+      try {
+        geminiResponse = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${geminiApiKey}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            signal: controller.signal,
+            body: JSON.stringify({
+              contents: toGeminiContents(body.messages),
+              generationConfig: {
+                temperature: body.temperature,
+                maxOutputTokens: body.max_tokens,
+              },
+            }),
+          }
+        );
+      } finally {
+        clearTimeout(timer);
+      }
 
       if (!geminiResponse.ok) {
         if (openRouterApiKey) {

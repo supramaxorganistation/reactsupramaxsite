@@ -63,6 +63,7 @@ const postGeminiChat = async (body) => {
     {
       params: { key: process.env.GEMINI_API_KEY },
       headers: { 'Content-Type': 'application/json' },
+      timeout: 8000,
     }
   );
 };
@@ -163,7 +164,7 @@ app.post('/api/verify-recaptcha', async (req, res) => {
 });
 
 app.post('/api/submit-form', async (req, res) => {
-  const { token, ...formData } = req.body || {};
+  const { token, form = {} } = req.body || {};
 
   if (!token) {
     return res.status(400).json({ error: 'Missing reCAPTCHA token' });
@@ -193,7 +194,7 @@ app.post('/api/submit-form', async (req, res) => {
     const submitResponse = await axios.post(
       'https://api.web3forms.com/submit',
       {
-        ...formData,
+        ...form,
         access_key: process.env.WEB3FORMS_KEY,
       },
       {
