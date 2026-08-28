@@ -10,6 +10,7 @@ export const handler = async (event) => {
     const openRouterModel = process.env.OPENROUTER_MODEL || 'meta-llama/llama-3.1-8b-instruct';
 
     const body = JSON.parse(event.body || '{}');
+    const maxTokens = Math.min(Number(body.max_tokens) || 800, 400);
 
     const buildOpenAiResponse = (content) => ({
       choices: [{ message: { role: 'assistant', content } }],
@@ -47,7 +48,7 @@ export const handler = async (event) => {
               contents: toGeminiContents(body.messages),
               generationConfig: {
                 temperature: body.temperature,
-                maxOutputTokens: body.max_tokens,
+                maxOutputTokens: maxTokens,
               },
             }),
           }
@@ -67,6 +68,7 @@ export const handler = async (event) => {
             body: JSON.stringify({
               model: openRouterModel,
               ...body,
+              max_tokens: maxTokens,
             }),
           });
 
@@ -113,6 +115,7 @@ export const handler = async (event) => {
       body: JSON.stringify({
         model: openRouterModel,
         ...body,
+        max_tokens: maxTokens,
       }),
     });
 

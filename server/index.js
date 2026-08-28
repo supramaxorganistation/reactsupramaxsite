@@ -48,12 +48,13 @@ const extractGeminiText = (data) => {
 };
 
 const postGeminiChat = async (body) => {
+  const maxTokens = Math.min(Number(body.max_tokens) || 800, 400);
   const payload = {
     systemInstruction: body.systemInstruction,
     contents: toGeminiContents(body.messages),
     generationConfig: {
       temperature: body.temperature,
-      maxOutputTokens: body.max_tokens,
+      maxOutputTokens: maxTokens,
     },
   };
 
@@ -69,9 +70,11 @@ const postGeminiChat = async (body) => {
 };
 
 const postOpenRouterChat = async (body) => {
+  const maxTokens = Math.min(Number(body.max_tokens) || 800, 400);
   const payload = {
     model: openRouterModel,
     ...body,
+    max_tokens: maxTokens,
   };
 
   return axios.post('https://openrouter.ai/api/v1/chat/completions', payload, {
